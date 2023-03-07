@@ -1,0 +1,4 @@
+
+cp-management-host = "192.168.1.100"
+cp-management-user = "api_user"
+cp-management-password = "CHANGEME"
