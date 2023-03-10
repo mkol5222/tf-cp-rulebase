@@ -2,7 +2,8 @@ resource "checkpoint_management_access_rule" "rule1" {
   layer = "${checkpoint_management_package.CPX_Demo.name} Network"
   position = {top = "top"}
   name = "Rule 1"
-  source = [checkpoint_management_host.host1.name, checkpoint_management_host.host6.name]
+  source = [checkpoint_management_host.host1.name, checkpoint_management_host.host6.name, checkpoint_management_host.host3.name]
+  #source = [checkpoint_management_host.host6.name]
   enabled = true
   destination = [checkpoint_management_network.network1.name]
   destination_negate = false
