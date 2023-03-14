@@ -47,3 +47,14 @@ resource "checkpoint_management_network" "network5" {
     auto_rule = false
   }
 }
+
+resource "checkpoint_management_network" "vnet" {
+  name = "vnet"
+  subnet4 = "10.0.0.0"
+  mask_length4 = 8
+  color = "green"
+  ignore_warnings = true
+  nat_settings = {
+    auto_rule = false
+  }
+}

@@ -42,3 +42,35 @@
 # #   data_center_name = "AKS2"
 # #   #uid_in_data_center = "app_web2"
 # # }
+
+resource "checkpoint_management_data_center_query" "aks1-test-web1" {
+  name         = "AKS1 from test web1 pods"
+  data_centers = ["AKS1"]
+
+  query_rules {
+    key_type = "tag"
+    key      = "app"
+    values   = ["webka1"]
+  }
+    query_rules {
+    key_type = "tag"
+    key      = "env"
+    values   = ["test"]
+  }
+}
+
+resource "checkpoint_management_data_center_query" "aks1-prod-web1" {
+  name         = "AKS1 from prod web1 pods"
+  data_centers = ["AKS1"]
+
+  query_rules {
+    key_type = "tag"
+    key      = "app"
+    values   = ["webka1"]
+  }
+    query_rules {
+    key_type = "tag"
+    key      = "env"
+    values   = ["prod"]
+  }
+}
