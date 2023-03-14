@@ -19,7 +19,7 @@ resource "checkpoint_management_azure_data_center_server" "testAzure" {
 
 resource "checkpoint_management_data_center_query" "example" {
   name         = "myQuery"
-  data_centers = ["myAzure"]
+  data_centers = [checkpoint_management_azure_data_center_server.testAzure.name]
   query_rules {
     key_type = "predefined"
     key      = "name-in-data-center"
@@ -29,7 +29,7 @@ resource "checkpoint_management_data_center_query" "example" {
 
 resource "checkpoint_management_data_center_query" "uprod" {
   name         = "Ubuntu in prod on myAzure"
-  data_centers = ["myAzure"]
+  data_centers = [checkpoint_management_azure_data_center_server.testAzure.name]
     query_rules {
     key_type = "predefined"
     key      = "type-in-data-center"
