@@ -2,11 +2,11 @@
 resource "checkpoint_management_access_rule" "rule100" {
   layer = "${checkpoint_management_package.CPX_Demo.name} Network"
   position = {top = "top"}
-  name = "Ubuntu prod to ipconfig"
+  name = "a Ubuntu prod to ipconfig"
   source = [checkpoint_management_data_center_query.uprod.name]
   #source = [checkpoint_management_host.host6.name]
   enabled = true
-  destination = [checkpoint_management_dns_domain.ipconfig.name]
+  destination = [checkpoint_management_dns_domain.ipconfig.name, checkpoint_management_dns_domain.ifconfig.name]
   destination_negate = false
   service = [data.checkpoint_management_data_service_tcp.data_service_http.name, data.checkpoint_management_data_service_tcp.data_service_https.name]
   service_negate = false
@@ -28,7 +28,7 @@ resource "checkpoint_management_access_rule" "rule100" {
 resource "checkpoint_management_access_rule" "rule110" {
   layer = "${checkpoint_management_package.CPX_Demo.name} Network"
   position =  {below = checkpoint_management_access_rule.rule100.id}
-  name = "AKS1 web1 in test - egress"
+  name = "AKS1 webka1 in test - egress"
   #source = [checkpoint_management_data_center_query.uprod.name]
   source = [checkpoint_management_data_center_query.aks1-test-web1.name]
   enabled = true
@@ -52,7 +52,7 @@ resource "checkpoint_management_access_rule" "rule110" {
   resource "checkpoint_management_access_rule" "rule120" {
   layer = "${checkpoint_management_package.CPX_Demo.name} Network"
   position =  {below = checkpoint_management_access_rule.rule110.id}
-  name = "AKS1 web1 in test - egress"
+  name = "AKS1 webka1 in prod - egress"
   #source = [checkpoint_management_data_center_query.uprod.name]
   source = [checkpoint_management_data_center_query.aks1-prod-web1.name]
   enabled = true
@@ -73,6 +73,32 @@ resource "checkpoint_management_access_rule" "rule110" {
     type = "Log"
   }
 }
+
+  resource "checkpoint_management_access_rule" "rule130" {
+  layer = "${checkpoint_management_package.CPX_Demo.name} Network"
+  position =  {below = checkpoint_management_access_rule.rule120.id}
+  name = "AKS1 from Pavel"
+  #source = [checkpoint_management_data_center_query.uprod.name]
+  source = [checkpoint_management_data_center_query.pavel.name]
+  enabled = true
+  destination = ["Any"]
+  destination_negate = false
+  service = [data.checkpoint_management_data_service_tcp.data_service_http.name, data.checkpoint_management_data_service_tcp.data_service_https.name]
+  service_negate = false
+  action = "Accept"
+  action_settings = {
+    enable_identity_captive_portal = false
+  }
+  track = {
+    accounting = false
+	alert = "none"
+    enable_firewall_session = true
+    per_connection = true
+    per_session = true
+    type = "Log"
+  }
+}
+
 
 resource "checkpoint_management_access_rule" "rule900" {
   layer = "${checkpoint_management_package.CPX_Demo.name} Network"

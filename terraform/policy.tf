@@ -21,6 +21,7 @@ variable "install" {
   description = "Set to true to INSTALL POLICY"
 }
  resource "checkpoint_management_install_policy" "example" {
+   count = var.install ? 1 : 0
   policy_package = "TerraformPolicyDemo"
   targets = ["chkp"]
 }

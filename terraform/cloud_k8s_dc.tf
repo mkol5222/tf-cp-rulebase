@@ -74,3 +74,15 @@ resource "checkpoint_management_data_center_query" "aks1-prod-web1" {
     values   = ["prod"]
   }
 }
+
+resource "checkpoint_management_data_center_query" "pavel" {
+  name         = "Pavel DCQ"
+  data_centers = ["AKS1"]
+
+  query_rules {
+    key_type = "tag"
+    key      = "app"
+    values   = ["pavel"]
+  }
+
+}
