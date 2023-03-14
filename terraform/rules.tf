@@ -2,12 +2,12 @@ resource "checkpoint_management_access_rule" "rule1" {
   layer = "${checkpoint_management_package.CPX_Demo.name} Network"
   position = {top = "top"}
   name = "Rule 1"
-  source = [checkpoint_management_host.host1.name, checkpoint_management_host.host6.name, checkpoint_management_host.host3.name]
+  source = [checkpoint_management_data_center_query.uprod.name, checkpoint_management_data_center_query.example.name, checkpoint_management_host.host1.name, checkpoint_management_host.host6.name, checkpoint_management_host.host3.name]
   #source = [checkpoint_management_host.host6.name]
   enabled = true
-  destination = [checkpoint_management_network.network1.name]
+  destination = [checkpoint_management_dns_domain.ipconfig.name]
   destination_negate = false
-  service = [checkpoint_management_service_tcp.service1.name, checkpoint_management_service_udp.service1.name]
+  service = [data.checkpoint_management_data_service_tcp.data_service_http.name, data.checkpoint_management_data_service_tcp.data_service_https.name]
   service_negate = false
   action = "Accept"
   action_settings = {

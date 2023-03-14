@@ -60,3 +60,12 @@ resource "checkpoint_management_host" "host7" {
     auto_rule = false
     }
 }
+
+resource "checkpoint_management_host" "host99" {
+  name = "host99"
+  ipv4_address = "3.2.7.99"
+  color = "orange"
+  nat_settings = {
+    auto_rule = false
+    }
+}

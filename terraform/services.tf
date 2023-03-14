@@ -69,3 +69,10 @@ resource "checkpoint_management_service_udp" "service5" {
   match_for_any = false
   session_timeout = 3550
 }
+
+data "checkpoint_management_data_service_tcp" "data_service_http" {
+    name = "http"
+}
+data "checkpoint_management_data_service_tcp" "data_service_https" {
+    name = "https"
+}
