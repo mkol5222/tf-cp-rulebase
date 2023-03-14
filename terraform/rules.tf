@@ -6,7 +6,7 @@ resource "checkpoint_management_access_rule" "rule100" {
   source = [checkpoint_management_data_center_query.uprod.name]
   #source = [checkpoint_management_host.host6.name]
   enabled = true
-  destination = [checkpoint_management_dns_domain.ipconfig.name, checkpoint_management_dns_domain.ifconfig.name]
+  destination = [checkpoint_management_dns_domain.ip-iol.name, checkpoint_management_dns_domain.ipconfig.name, checkpoint_management_dns_domain.ifconfig.name]
   destination_negate = false
   service = [data.checkpoint_management_data_service_tcp.data_service_http.name, data.checkpoint_management_data_service_tcp.data_service_https.name]
   service_negate = false
