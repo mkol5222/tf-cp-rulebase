@@ -46,3 +46,23 @@ resource "checkpoint_management_data_center_query" "uprod" {
     values   = ["prod"]
   }
 }
+
+resource "checkpoint_management_data_center_query" "utest" {
+  name         = "Ubuntu in test on myAzure"
+  data_centers = [checkpoint_management_azure_data_center_server.testAzure.name]
+    query_rules {
+    key_type = "predefined"
+    key      = "type-in-data-center"
+    values   = ["Virtual Machine"]
+  }
+  query_rules {
+    key_type = "tag"
+    key      = "app"
+    values   = ["ubuntu"]
+  }
+    query_rules {
+    key_type = "tag"
+    key      = "env"
+    values   = ["test"]
+  }
+}

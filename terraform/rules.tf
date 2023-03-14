@@ -2,7 +2,7 @@
 resource "checkpoint_management_access_rule" "rule100" {
   layer = "${checkpoint_management_package.CPX_Demo.name} Network"
   position = {top = "top"}
-  name = "a Ubuntu prod to ipconfig"
+  name = "a Ubuntu prod to Internet"
   source = [checkpoint_management_data_center_query.uprod.name]
   #source = [checkpoint_management_host.host6.name]
   enabled = true
@@ -25,10 +25,35 @@ resource "checkpoint_management_access_rule" "rule100" {
   }
 }
 
+resource "checkpoint_management_access_rule" "rule101" {
+  layer = "${checkpoint_management_package.CPX_Demo.name} Network"
+  position = {below = checkpoint_management_access_rule.rule100.id}
+  name = "a Ubuntu test to Internet"
+  source = [checkpoint_management_data_center_query.utest.name]
+  #source = [checkpoint_management_host.host6.name]
+  enabled = true
+  #destination = [checkpoint_management_dns_domain.ip-iol.name, checkpoint_management_dns_domain.ipconfig.name, checkpoint_management_dns_domain.ifconfig.name]
+  destination = ["Any"]
+  destination_negate = false
+  service = [data.checkpoint_management_data_service_tcp.data_service_http.name, data.checkpoint_management_data_service_tcp.data_service_https.name]
+  service_negate = false
+  action = "Accept"
+  action_settings = {
+    enable_identity_captive_portal = false
+  }
+  track = {
+    accounting = false
+	alert = "none"
+    enable_firewall_session = true
+    per_connection = true
+    per_session = true
+    type = "Log"
+  }
+}
 // "checkpoint_management_data_center_query" "aks1-test-web1"
 resource "checkpoint_management_access_rule" "rule110" {
   layer = "${checkpoint_management_package.CPX_Demo.name} Network"
-  position =  {below = checkpoint_management_access_rule.rule100.id}
+  position =  {below = checkpoint_management_access_rule.rule101.id}
   name = "AKS1 webka1 in test - egress"
   #source = [checkpoint_management_data_center_query.uprod.name]
   source = [checkpoint_management_data_center_query.aks1-test-web1.name]
