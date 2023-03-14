@@ -17,15 +17,15 @@ resource "checkpoint_management_azure_data_center_server" "testAzure" {
   application_key =  var.az-secret
 }
 
-resource "checkpoint_management_data_center_query" "example" {
-  name         = "myQuery"
-  data_centers = [checkpoint_management_azure_data_center_server.testAzure.name]
-  query_rules {
-    key_type = "predefined"
-    key      = "name-in-data-center"
-    values   = ["firstVal", "secondVal"]
-  }
-}
+# resource "checkpoint_management_data_center_query" "example" {
+#   name         = "myQuery"
+#   data_centers = [checkpoint_management_azure_data_center_server.testAzure.name]
+#   query_rules {
+#     key_type = "predefined"
+#     key      = "name-in-data-center"
+#     values   = ["firstVal", "secondVal"]
+#   }
+# }
 
 resource "checkpoint_management_data_center_query" "uprod" {
   name         = "Ubuntu in prod on myAzure"
