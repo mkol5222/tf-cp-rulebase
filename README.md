@@ -18,3 +18,7 @@ terraform apply
 ```
 
 Look for new Security Package called *TerraformPolicyDemo* in SmartConsole.
+
+```
+az ad sp create-for-rbac -n cloudguard-reader-client --years 99 --role Reader --scopes /subscriptions/f4ad5e85-ec75-4321-8854-ed7eb611f61d
+```
