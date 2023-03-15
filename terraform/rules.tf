@@ -128,7 +128,7 @@ resource "checkpoint_management_access_rule" "rule110" {
 
 resource "checkpoint_management_access_rule" "rule900" {
   layer = "${checkpoint_management_package.CPX_Demo.name} Network"
-   position = {below = checkpoint_management_access_rule.rule100.id}
+   position = {below = checkpoint_management_access_rule.rule130.id}
   name = "Logger from VNET"
   source = [checkpoint_management_network.vnet.name]
   #source = [checkpoint_management_host.host6.name]
@@ -150,11 +150,11 @@ resource "checkpoint_management_access_rule" "rule900" {
     type = "Log"
   }
 }
-resource "checkpoint_management_access_rule" "rule901" {
+resource "checkpoint_management_access_rule" "rule902" {
   layer = "${checkpoint_management_package.CPX_Demo.name} Network"
   #position = {bottom = "bottom"}
   position = {below = checkpoint_management_access_rule.rule900.id}
-  name = "Logger to VNET"
+  name = "Logger to VNET."
   source = ["Any"]
   #source = [checkpoint_management_host.host6.name]
   enabled = true
