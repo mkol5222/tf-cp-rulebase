@@ -45,7 +45,12 @@ resource "checkpoint_management_data_center_query" "uprod" {
     key      = "app"
     values   = ["ubuntu"]
   }
-
+  lifecycle {
+    ignore_changes = [
+     
+      query_rules,
+    ]
+  }
 }
 
 resource "checkpoint_management_data_center_query" "utest" {
@@ -66,5 +71,10 @@ resource "checkpoint_management_data_center_query" "utest" {
     key      = "app"
     values   = ["ubuntu"]
   }
-
+  lifecycle {
+    ignore_changes = [
+     
+      query_rules,
+    ]
+  }
 }

@@ -73,6 +73,12 @@ resource "checkpoint_management_data_center_query" "aks1-test-web1" {
     key      = "env"
     values   = ["test"]
   }
+    lifecycle {
+    ignore_changes = [
+     
+      query_rules,
+    ]
+  }
 }
 
 resource "checkpoint_management_data_center_query" "aks1-prod-web1" {
@@ -89,6 +95,12 @@ resource "checkpoint_management_data_center_query" "aks1-prod-web1" {
     key      = "env"
     values   = ["prod"]
   }
+    lifecycle {
+    ignore_changes = [
+     
+      query_rules,
+    ]
+  }
 }
 
 resource "checkpoint_management_data_center_query" "pavel" {
@@ -100,5 +112,10 @@ resource "checkpoint_management_data_center_query" "pavel" {
     key      = "app"
     values   = ["pavel"]
   }
-
+  lifecycle {
+    ignore_changes = [
+     
+      query_rules,
+    ]
+  }
 }
