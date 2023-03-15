@@ -35,16 +35,17 @@ resource "checkpoint_management_data_center_query" "uprod" {
   #   key      = "type-in-data-center"
   #   values   = ["Virtual Machine"]
   # }
+      query_rules {
+    key_type = "tag"
+    key      = "env"
+    values   = ["prod"]
+  }
   query_rules {
     key_type = "tag"
     key      = "app"
     values   = ["ubuntu"]
   }
-    query_rules {
-    key_type = "tag"
-    key      = "env"
-    values   = ["prod"]
-  }
+
 }
 
 resource "checkpoint_management_data_center_query" "utest" {
