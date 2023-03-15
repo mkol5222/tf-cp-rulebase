@@ -81,7 +81,7 @@ resource "checkpoint_management_data_center_query" "aks1-test-web1" {
   }
 }
 
-resource "checkpoint_management_data_center_query" "aks1-prod-web1" {
+resource "checkpoint_management_data_center_query" "aks1-prod-web1b" {
   name         = "AKS1 from prod web1 pods"
   data_centers = [checkpoint_management_kubernetes_data_center_server.aks1.name]
 
@@ -94,6 +94,11 @@ resource "checkpoint_management_data_center_query" "aks1-prod-web1" {
     key_type = "tag"
     key      = "env"
     values   = ["prod"]
+  }
+    query_rules {
+    key_type = "tag"
+    key      = "__namespace"
+    values   = ["demo"]
   }
     lifecycle {
     ignore_changes = [
