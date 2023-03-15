@@ -43,9 +43,23 @@
 # #   #uid_in_data_center = "app_web2"
 # # }
 
+variable "aks1_hostname" {
+    description = "AKS hostname"
+}
+variable "aks1_token" {
+    description = "AKS token"
+}
+
+resource "checkpoint_management_kubernetes_data_center_server" "aks1" {
+  name       = "AKS1"
+  hostname   = var.aks1_hostname
+  token_file = var.aks1_token
+  unsafe_auto_accept = true
+}
+
 resource "checkpoint_management_data_center_query" "aks1-test-web1" {
   name         = "AKS1 from test web1 pods"
-  data_centers = ["AKS1"]
+  data_centers = [checkpoint_management_kubernetes_data_center_server.aks1.name]
 
   query_rules {
     key_type = "tag"
@@ -61,7 +75,7 @@ resource "checkpoint_management_data_center_query" "aks1-test-web1" {
 
 resource "checkpoint_management_data_center_query" "aks1-prod-web1" {
   name         = "AKS1 from prod web1 pods"
-  data_centers = ["AKS1"]
+  data_centers = [checkpoint_management_kubernetes_data_center_server.aks1.name]
 
   query_rules {
     key_type = "tag"
@@ -77,7 +91,7 @@ resource "checkpoint_management_data_center_query" "aks1-prod-web1" {
 
 resource "checkpoint_management_data_center_query" "pavel" {
   name         = "Pavel DCQ"
-  data_centers = ["AKS1"]
+  data_centers = [checkpoint_management_kubernetes_data_center_server.aks1.name]
 
   query_rules {
     key_type = "tag"
