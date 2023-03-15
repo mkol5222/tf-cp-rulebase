@@ -80,7 +80,7 @@ resource "checkpoint_management_access_rule" "rule110" {
   position =  {below = checkpoint_management_access_rule.rule110.id}
   name = "AKS1 webka1 in prod - egress"
   #source = [checkpoint_management_data_center_query.uprod.name]
-  source = [checkpoint_management_data_center_query.aks1-prod-web1.name]
+  source = [checkpoint_management_data_center_query.aks1-prod-web1b.name]
   enabled = true
   destination = ["Any"]
   destination_negate = false
