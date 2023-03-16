@@ -180,6 +180,7 @@ resource "checkpoint_management_access_rule" "rule130" {
 resource "checkpoint_management_access_rule" "rule900" {
   layer    = "${checkpoint_management_package.CPX_Demo.name} Network"
   position = { below = checkpoint_management_access_rule.rule130.id }
+  //position = { top = "top" }
   name     = "Logger from VNET"
   source   = [checkpoint_management_network.vnet.name]
   #source = [checkpoint_management_host.host6.name]
