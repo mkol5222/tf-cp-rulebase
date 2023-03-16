@@ -50,6 +50,56 @@ resource "checkpoint_management_access_rule" "rule101" {
     type = "Log"
   }
 }
+resource "checkpoint_management_access_rule" "pods-in-default" {
+  layer = "${checkpoint_management_package.CPX_Demo.name} Network"
+  position =  {above = checkpoint_management_access_rule.webka1-test-ipiol.id}
+  name = "Pods in DEFAULT"
+  #source = [checkpoint_management_data_center_query.uprod.name]
+  source = [checkpoint_management_data_center_query.pods-in-default.name]
+  enabled = true
+  destination = ["Any"]
+  destination_negate = false
+  service = ["Any"]
+  service_negate = false
+  action = "Accept"
+  action_settings = {
+    enable_identity_captive_portal = false
+  }
+  track = {
+    accounting = false
+	alert = "none"
+    enable_firewall_session = true
+    per_connection = true
+    per_session = true
+    type = "Log"
+  }
+}
+
+resource "checkpoint_management_access_rule" "webka1-test-ipiol" {
+  layer = "${checkpoint_management_package.CPX_Demo.name} Network"
+  position =  {above = checkpoint_management_access_rule.rule110.id}
+  name = "AKS1 webka1 in test - ip.iol.cz"
+  #source = [checkpoint_management_data_center_query.uprod.name]
+  source = [checkpoint_management_data_center_query.aks1-test-web1.name]
+  enabled = true
+  destination = [checkpoint_management_dns_domain.ip-iol.name]
+  destination_negate = false
+  service = [data.checkpoint_management_data_service_tcp.data_service_http.name, data.checkpoint_management_data_service_tcp.data_service_https.name]
+  service_negate = false
+  action = "Accept"
+  action_settings = {
+    enable_identity_captive_portal = false
+  }
+  track = {
+    accounting = false
+	alert = "none"
+    enable_firewall_session = true
+    per_connection = true
+    per_session = true
+    type = "Log"
+  }
+}
+
 // "checkpoint_management_data_center_query" "aks1-test-web1"
 resource "checkpoint_management_access_rule" "rule110" {
   layer = "${checkpoint_management_package.CPX_Demo.name} Network"

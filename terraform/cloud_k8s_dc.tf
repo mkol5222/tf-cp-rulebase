@@ -81,6 +81,33 @@ resource "checkpoint_management_data_center_query" "aks1-test-web1" {
   }
 }
 
+resource "checkpoint_management_data_center_query" "pods-in-default" {
+  name         = "pods in default NS"
+  data_centers = [checkpoint_management_kubernetes_data_center_server.aks1.name]
+
+  # query_rules {
+  #   key_type = "tag"
+  #   key      = "app"
+  #   values   = ["webka1"]
+  # }
+  #   query_rules {
+  #   key_type = "tag"
+  #   key      = "env"
+  #   values   = ["prod"]
+  # }
+    query_rules {
+    key_type = "tag"
+    key      = "__namespace"
+    values   = ["default"]
+  }
+    lifecycle {
+    ignore_changes = [
+     
+      query_rules,
+    ]
+  }
+}
+
 resource "checkpoint_management_data_center_query" "aks1-prod-web1b" {
   name         = "AKS1 webka1 in prod"
   data_centers = [checkpoint_management_kubernetes_data_center_server.aks1.name]
