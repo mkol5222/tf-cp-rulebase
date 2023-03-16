@@ -61,7 +61,8 @@ resource "checkpoint_management_access_rule" "pods-in-default" {
   destination_negate = false
   service = ["Any"]
   service_negate = false
-  action = "Accept"
+  #action = "Accept"
+  action = "Drop"
   action_settings = {
     enable_identity_captive_portal = false
   }

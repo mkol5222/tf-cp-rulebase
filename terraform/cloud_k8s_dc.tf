@@ -82,7 +82,7 @@ resource "checkpoint_management_data_center_query" "aks1-test-web1" {
 }
 
 resource "checkpoint_management_data_center_query" "pods-in-default" {
-  name         = "pods in default NS"
+  name         = "TF pods in default NS"
   data_centers = [checkpoint_management_kubernetes_data_center_server.aks1.name]
 
   # query_rules {
