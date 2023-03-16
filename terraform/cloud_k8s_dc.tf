@@ -60,7 +60,7 @@ resource "checkpoint_management_kubernetes_data_center_server" "aks1" {
 }
 
 resource "checkpoint_management_data_center_query" "aks1-test-web1" {
-  name         = "AKS1 from test web1 pods"
+  name         = "AKS1 webka1 in test"
   data_centers = [checkpoint_management_kubernetes_data_center_server.aks1.name]
 
   query_rules {
@@ -82,7 +82,7 @@ resource "checkpoint_management_data_center_query" "aks1-test-web1" {
 }
 
 resource "checkpoint_management_data_center_query" "aks1-prod-web1b" {
-  name         = "AKS1 from prod web1 pods"
+  name         = "AKS1 webka1 in prod"
   data_centers = [checkpoint_management_kubernetes_data_center_server.aks1.name]
 
   query_rules {
