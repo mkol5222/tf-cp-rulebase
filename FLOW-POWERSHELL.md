@@ -25,4 +25,11 @@ tf apply -auto-approve
 tf apply -auto-approve -var publish=true
 # make policy applied to enforcement gateway
 tf apply -auto-approve -var install=true
+
+# sessions and rule base
+ssh cp mgmt_cli -r true show sessions details-level "full"
+ssh cp mgmt_cli -r true show access-layers
+ssh cp mgmt_cli -r true show access-layer uid "a10561ce-7146-4f9a-810f-e68fbf875b2c"
+# https://sc1.checkpoint.com/documents/latest/APIs/#cli/show-access-rulebase~v1.9%20
+ssh cp mgmt_cli -r true show  access-rulebase uid "a10561ce-7146-4f9a-810f-e68fbf875b2c" details-level "standard" use-object-dictionary true  --format json
 ```
