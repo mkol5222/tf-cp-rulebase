@@ -44,18 +44,18 @@
 # # }
 
 variable "aks1_hostname" {
-    description = "AKS hostname"
+  description = "AKS hostname"
 }
 variable "aks1_token" {
-    description = "AKS token"
+  description = "AKS token"
 }
 
 resource "checkpoint_management_kubernetes_data_center_server" "aks1" {
-  name       = "AKS1"
-  hostname   = var.aks1_hostname
-  token_file = var.aks1_token
+  name               = "AKS1"
+  hostname           = var.aks1_hostname
+  token_file         = var.aks1_token
   unsafe_auto_accept = true
-  ignore_warnings = true
+  ignore_warnings    = true
 
 }
 
@@ -68,14 +68,14 @@ resource "checkpoint_management_data_center_query" "aks1-test-web1" {
     key      = "app"
     values   = ["webka1"]
   }
-    query_rules {
+  query_rules {
     key_type = "tag"
     key      = "env"
     values   = ["test"]
   }
-    lifecycle {
+  lifecycle {
     ignore_changes = [
-     
+
       query_rules,
     ]
   }
@@ -95,14 +95,14 @@ resource "checkpoint_management_data_center_query" "pods-in-default" {
   #   key      = "env"
   #   values   = ["prod"]
   # }
-    query_rules {
+  query_rules {
     key_type = "tag"
     key      = "__namespace"
     values   = ["default"]
   }
-    lifecycle {
+  lifecycle {
     ignore_changes = [
-     
+
       query_rules,
     ]
   }
@@ -117,19 +117,19 @@ resource "checkpoint_management_data_center_query" "aks1-prod-web1b" {
     key      = "app"
     values   = ["webka1"]
   }
-    query_rules {
+  query_rules {
     key_type = "tag"
     key      = "env"
     values   = ["prod"]
   }
-    query_rules {
+  query_rules {
     key_type = "tag"
     key      = "__namespace"
     values   = ["demo"]
   }
-    lifecycle {
+  lifecycle {
     ignore_changes = [
-     
+
       query_rules,
     ]
   }
@@ -146,7 +146,7 @@ resource "checkpoint_management_data_center_query" "pavel" {
   }
   lifecycle {
     ignore_changes = [
-     
+
       query_rules,
     ]
   }

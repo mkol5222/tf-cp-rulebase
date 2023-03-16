@@ -1,229 +1,229 @@
 
 resource "checkpoint_management_access_rule" "rule100" {
-  layer = "${checkpoint_management_package.CPX_Demo.name} Network"
-  position = {top = "top"}
-  name = "a Ubuntu prod to Internet"
-  source = [checkpoint_management_data_center_query.uprod.name]
+  layer    = "${checkpoint_management_package.CPX_Demo.name} Network"
+  position = { top = "top" }
+  name     = "a Ubuntu prod to Internet"
+  source   = [checkpoint_management_data_center_query.uprod.name]
   #source = [checkpoint_management_host.host6.name]
   enabled = true
   #destination = [checkpoint_management_dns_domain.ip-iol.name, checkpoint_management_dns_domain.ipconfig.name, checkpoint_management_dns_domain.ifconfig.name]
-  destination = ["Any"]
+  destination        = ["Any"]
   destination_negate = false
-  service = [data.checkpoint_management_data_service_tcp.data_service_http.name, data.checkpoint_management_data_service_tcp.data_service_https.name]
-  service_negate = false
-  action = "Accept"
+  service            = [data.checkpoint_management_data_service_tcp.data_service_http.name, data.checkpoint_management_data_service_tcp.data_service_https.name]
+  service_negate     = false
+  action             = "Accept"
   action_settings = {
     enable_identity_captive_portal = false
   }
   track = {
-    accounting = false
-	alert = "none"
+    accounting              = false
+    alert                   = "none"
     enable_firewall_session = true
-    per_connection = true
-    per_session = true
-    type = "Log"
+    per_connection          = true
+    per_session             = true
+    type                    = "Log"
   }
 }
 
 resource "checkpoint_management_access_rule" "rule101" {
-  layer = "${checkpoint_management_package.CPX_Demo.name} Network"
-  position = {below = checkpoint_management_access_rule.rule100.id}
-  name = "a Ubuntu test to Internet"
-  source = [checkpoint_management_data_center_query.utest.name]
+  layer    = "${checkpoint_management_package.CPX_Demo.name} Network"
+  position = { below = checkpoint_management_access_rule.rule100.id }
+  name     = "a Ubuntu test to Internet"
+  source   = [checkpoint_management_data_center_query.utest.name]
   #source = [checkpoint_management_host.host6.name]
   enabled = true
   #destination = [checkpoint_management_dns_domain.ip-iol.name, checkpoint_management_dns_domain.ipconfig.name, checkpoint_management_dns_domain.ifconfig.name]
-  destination = ["Any"]
+  destination        = ["Any"]
   destination_negate = false
-  service = [data.checkpoint_management_data_service_tcp.data_service_http.name, data.checkpoint_management_data_service_tcp.data_service_https.name]
-  service_negate = false
-  action = "Accept"
+  service            = [data.checkpoint_management_data_service_tcp.data_service_http.name, data.checkpoint_management_data_service_tcp.data_service_https.name]
+  service_negate     = false
+  action             = "Accept"
   action_settings = {
     enable_identity_captive_portal = false
   }
   track = {
-    accounting = false
-	alert = "none"
+    accounting              = false
+    alert                   = "none"
     enable_firewall_session = true
-    per_connection = true
-    per_session = true
-    type = "Log"
+    per_connection          = true
+    per_session             = true
+    type                    = "Log"
   }
 }
 resource "checkpoint_management_access_rule" "pods-in-default" {
-  layer = "${checkpoint_management_package.CPX_Demo.name} Network"
-  position =  {above = checkpoint_management_access_rule.webka1-test-ipiol.id}
-  name = "Pods in DEFAULT"
+  layer    = "${checkpoint_management_package.CPX_Demo.name} Network"
+  position = { above = checkpoint_management_access_rule.webka1-test-ipiol.id }
+  name     = "Pods in DEFAULT"
   #source = [checkpoint_management_data_center_query.uprod.name]
-  source = [checkpoint_management_data_center_query.pods-in-default.name]
-  enabled = true
-  destination = ["Any"]
+  source             = [checkpoint_management_data_center_query.pods-in-default.name]
+  enabled            = true
+  destination        = ["Any"]
   destination_negate = false
-  service = ["Any"]
-  service_negate = false
+  service            = ["Any"]
+  service_negate     = false
   #action = "Accept"
   action = "Drop"
   action_settings = {
     enable_identity_captive_portal = false
   }
   track = {
-    accounting = false
-	alert = "none"
+    accounting              = false
+    alert                   = "none"
     enable_firewall_session = true
-    per_connection = true
-    per_session = true
-    type = "Log"
+    per_connection          = true
+    per_session             = true
+    type                    = "Log"
   }
 }
 
 resource "checkpoint_management_access_rule" "webka1-test-ipiol" {
-  layer = "${checkpoint_management_package.CPX_Demo.name} Network"
-  position =  {above = checkpoint_management_access_rule.rule110.id}
-  name = "AKS1 webka1 in test - ip.iol.cz"
+  layer    = "${checkpoint_management_package.CPX_Demo.name} Network"
+  position = { above = checkpoint_management_access_rule.rule110.id }
+  name     = "AKS1 webka1 in test - ip.iol.cz"
   #source = [checkpoint_management_data_center_query.uprod.name]
-  source = [checkpoint_management_data_center_query.aks1-test-web1.name]
-  enabled = true
-  destination = [checkpoint_management_dns_domain.ip-iol.name]
+  source             = [checkpoint_management_data_center_query.aks1-test-web1.name]
+  enabled            = true
+  destination        = [checkpoint_management_dns_domain.ip-iol.name]
   destination_negate = false
-  service = [data.checkpoint_management_data_service_tcp.data_service_http.name, data.checkpoint_management_data_service_tcp.data_service_https.name]
-  service_negate = false
-  action = "Accept"
+  service            = [data.checkpoint_management_data_service_tcp.data_service_http.name, data.checkpoint_management_data_service_tcp.data_service_https.name]
+  service_negate     = false
+  action             = "Accept"
   action_settings = {
     enable_identity_captive_portal = false
   }
   track = {
-    accounting = false
-	alert = "none"
+    accounting              = false
+    alert                   = "none"
     enable_firewall_session = true
-    per_connection = true
-    per_session = true
-    type = "Log"
+    per_connection          = true
+    per_session             = true
+    type                    = "Log"
   }
 }
 
 // "checkpoint_management_data_center_query" "aks1-test-web1"
 resource "checkpoint_management_access_rule" "rule110" {
-  layer = "${checkpoint_management_package.CPX_Demo.name} Network"
-  position =  {below = checkpoint_management_access_rule.rule101.id}
-  name = "AKS1 webka1 in test - egress"
+  layer    = "${checkpoint_management_package.CPX_Demo.name} Network"
+  position = { below = checkpoint_management_access_rule.rule101.id }
+  name     = "AKS1 webka1 in test - egress"
   #source = [checkpoint_management_data_center_query.uprod.name]
-  source = [checkpoint_management_data_center_query.aks1-test-web1.name]
-  enabled = true
-  destination = ["Any"]
+  source             = [checkpoint_management_data_center_query.aks1-test-web1.name]
+  enabled            = true
+  destination        = ["Any"]
   destination_negate = false
-  service = [data.checkpoint_management_data_service_tcp.data_service_http.name, data.checkpoint_management_data_service_tcp.data_service_https.name]
-  service_negate = false
-  action = "Accept"
+  service            = [data.checkpoint_management_data_service_tcp.data_service_http.name, data.checkpoint_management_data_service_tcp.data_service_https.name]
+  service_negate     = false
+  action             = "Accept"
   action_settings = {
     enable_identity_captive_portal = false
   }
   track = {
-    accounting = false
-	alert = "none"
+    accounting              = false
+    alert                   = "none"
     enable_firewall_session = true
-    per_connection = true
-    per_session = true
-    type = "Log"
+    per_connection          = true
+    per_session             = true
+    type                    = "Log"
   }
 }
-  resource "checkpoint_management_access_rule" "rule120" {
-  layer = "${checkpoint_management_package.CPX_Demo.name} Network"
-  position =  {below = checkpoint_management_access_rule.rule110.id}
-  name = "AKS1 webka1 in prod - egress"
+resource "checkpoint_management_access_rule" "rule120" {
+  layer    = "${checkpoint_management_package.CPX_Demo.name} Network"
+  position = { below = checkpoint_management_access_rule.rule110.id }
+  name     = "AKS1 webka1 in prod - egress"
   #source = [checkpoint_management_data_center_query.uprod.name]
-  source = [checkpoint_management_data_center_query.aks1-prod-web1b.name]
-  enabled = true
-  destination = ["Any"]
+  source             = [checkpoint_management_data_center_query.aks1-prod-web1b.name]
+  enabled            = true
+  destination        = ["Any"]
   destination_negate = false
-  service = [data.checkpoint_management_data_service_tcp.data_service_http.name, data.checkpoint_management_data_service_tcp.data_service_https.name]
-  service_negate = false
-  action = "Accept"
+  service            = [data.checkpoint_management_data_service_tcp.data_service_http.name, data.checkpoint_management_data_service_tcp.data_service_https.name]
+  service_negate     = false
+  action             = "Accept"
   action_settings = {
     enable_identity_captive_portal = false
   }
   track = {
-    accounting = false
-	alert = "none"
+    accounting              = false
+    alert                   = "none"
     enable_firewall_session = true
-    per_connection = true
-    per_session = true
-    type = "Log"
+    per_connection          = true
+    per_session             = true
+    type                    = "Log"
   }
 }
 
-  resource "checkpoint_management_access_rule" "rule130" {
-  layer = "${checkpoint_management_package.CPX_Demo.name} Network"
-  position =  {below = checkpoint_management_access_rule.rule120.id}
-  name = "AKS1 from Pavel"
+resource "checkpoint_management_access_rule" "rule130" {
+  layer    = "${checkpoint_management_package.CPX_Demo.name} Network"
+  position = { below = checkpoint_management_access_rule.rule120.id }
+  name     = "AKS1 from Pavel"
   #source = [checkpoint_management_data_center_query.uprod.name]
-  source = [checkpoint_management_data_center_query.pavel.name]
-  enabled = true
-  destination = ["Any"]
+  source             = [checkpoint_management_data_center_query.pavel.name]
+  enabled            = true
+  destination        = ["Any"]
   destination_negate = false
-  service = [data.checkpoint_management_data_service_tcp.data_service_http.name, data.checkpoint_management_data_service_tcp.data_service_https.name]
-  service_negate = false
-  action = "Accept"
+  service            = [data.checkpoint_management_data_service_tcp.data_service_http.name, data.checkpoint_management_data_service_tcp.data_service_https.name]
+  service_negate     = false
+  action             = "Accept"
   action_settings = {
     enable_identity_captive_portal = false
   }
   track = {
-    accounting = false
-	alert = "none"
+    accounting              = false
+    alert                   = "none"
     enable_firewall_session = true
-    per_connection = true
-    per_session = true
-    type = "Log"
+    per_connection          = true
+    per_session             = true
+    type                    = "Log"
   }
 }
 
 
 resource "checkpoint_management_access_rule" "rule900" {
-  layer = "${checkpoint_management_package.CPX_Demo.name} Network"
-   position = {below = checkpoint_management_access_rule.rule130.id}
-  name = "Logger from VNET"
-  source = [checkpoint_management_network.vnet.name]
+  layer    = "${checkpoint_management_package.CPX_Demo.name} Network"
+  position = { below = checkpoint_management_access_rule.rule130.id }
+  name     = "Logger from VNET"
+  source   = [checkpoint_management_network.vnet.name]
   #source = [checkpoint_management_host.host6.name]
-  enabled = true
-  destination = ["Any"]
+  enabled            = true
+  destination        = ["Any"]
   destination_negate = false
-  service = ["Any"]
-  service_negate = false
-  action = "Accept"
+  service            = ["Any"]
+  service_negate     = false
+  action             = "Accept"
   action_settings = {
     enable_identity_captive_portal = false
   }
   track = {
-    accounting = false
-	alert = "none"
+    accounting              = false
+    alert                   = "none"
     enable_firewall_session = true
-    per_connection = true
-    per_session = true
-    type = "Log"
+    per_connection          = true
+    per_session             = true
+    type                    = "Log"
   }
 }
 resource "checkpoint_management_access_rule" "rule902" {
   layer = "${checkpoint_management_package.CPX_Demo.name} Network"
   #position = {bottom = "bottom"}
-  position = {below = checkpoint_management_access_rule.rule900.id}
-  name = "Logger to VNET."
-  source = ["Any"]
+  position = { below = checkpoint_management_access_rule.rule900.id }
+  name     = "Logger to VNET."
+  source   = ["Any"]
   #source = [checkpoint_management_host.host6.name]
-  enabled = true
-  destination = [checkpoint_management_network.vnet.name]
+  enabled            = true
+  destination        = [checkpoint_management_network.vnet.name]
   destination_negate = false
-  service = ["Any"]
-  service_negate = false
-  action = "Accept"
+  service            = ["Any"]
+  service_negate     = false
+  action             = "Accept"
   action_settings = {
     enable_identity_captive_portal = false
   }
   track = {
-    accounting = false
-	alert = "none"
+    accounting              = false
+    alert                   = "none"
     enable_firewall_session = true
-    per_connection = true
-    per_session = true
-    type = "Log"
+    per_connection          = true
+    per_session             = true
+    type                    = "Log"
   }
 }
 
