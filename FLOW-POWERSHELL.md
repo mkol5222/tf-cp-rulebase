@@ -31,5 +31,5 @@ ssh cp mgmt_cli -r true show sessions details-level "full"
 ssh cp mgmt_cli -r true show access-layers
 ssh cp mgmt_cli -r true show access-layer uid "a10561ce-7146-4f9a-810f-e68fbf875b2c"
 # https://sc1.checkpoint.com/documents/latest/APIs/#cli/show-access-rulebase~v1.9%20
-ssh cp mgmt_cli -r true show  access-rulebase uid "a10561ce-7146-4f9a-810f-e68fbf875b2c" details-level "standard" use-object-dictionary true  --format json
+ssh cp mgmt_cli -r true show  access-rulebase uid "02d8a4f9-37d0-42af-995e-1d39233ea011" details-level "standard" use-object-dictionary true  --format json
 ```

@@ -25,6 +25,32 @@ resource "checkpoint_management_access_rule" "webka1-prod" {
   }
 }
 
+resource "checkpoint_management_access_rule" "superman-in-default" {
+  layer    = "${checkpoint_management_package.CPX_Demo.name} Network"
+  position = { above = checkpoint_management_access_rule.pods-in-default.id }
+
+  name     = "From SUPERMAN in DEFAULT ns"
+  source   = [checkpoint_management_data_center_query.superman-default.name]
+  
+  enabled            = true
+  destination        = ["Any"]
+  destination_negate = false
+  service            = ["Any"]
+  service_negate     = false
+  action             = "Accept"
+  action_settings = {
+    enable_identity_captive_portal = false
+  }
+  track = {
+    accounting              = false
+    alert                   = "none"
+    enable_firewall_session = true
+    per_connection          = true
+    per_session             = true
+    type                    = "Log"
+  }
+}
+
 // checkpoint_management_data_center_query" "pods-default-ns" 
 resource "checkpoint_management_access_rule" "pods-in-default" {
   layer    = "${checkpoint_management_package.CPX_Demo.name} Network"
@@ -38,10 +64,10 @@ resource "checkpoint_management_access_rule" "pods-in-default" {
   destination_negate = false
   service            = ["Any"]
   service_negate     = false
-  action             = "Drop"
-  action_settings = {
-  #  enable_identity_captive_portal = false
-  }
+  action             = "Accept"
+  # action_settings = {
+  #   enable_identity_captive_portal = false
+  # }
   track = {
     accounting              = false
     alert                   = "none"
